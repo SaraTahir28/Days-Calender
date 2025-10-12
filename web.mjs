@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial render
   renderCalendar(currentMonth, currentYear);
+
   // Add click event listeners for "Previous" and "Next" buttons
   // to navigate the calendar month by month.
   prevBtn.addEventListener("click",()=>{
@@ -120,5 +121,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCalendar(currentMonth,currentYear);
     monthSelect.value=currentMonth;
     yearSelect.value=currentYear;
+  })
+  
+  //Jump to Specific Month & Year
+  jumpBtn.addEventListener("click",()=>{
+    currentMonth=monthSelect.value;
+    currentYear=yearSelect.value;
+    renderCalendar(currentMonth,currentYear);
   })
 });
