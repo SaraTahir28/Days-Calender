@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     option.textContent = name;
     monthSelect.appendChild(option);
   });
-  monthSelect.value=currentMonth;
 
   // Populate year select
   for (let year = 1900; year <= 2050; year++) {
@@ -36,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     option.textContent = year;
     yearSelect.appendChild(option);
   }
-  yearSelect.value=currentYear;
 
   console.log("Month and year selects populated!");
 
@@ -97,36 +95,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial render
   renderCalendar(currentMonth, currentYear);
-
-  // Add click event listeners for "Previous" and "Next" buttons
-  // to navigate the calendar month by month.
-  prevBtn.addEventListener("click",()=>{
-    currentMonth--;
-    if (currentMonth<0){
-      currentMonth=11;
-      currentYear--;
-    }
-    renderCalendar(currentMonth,currentYear);
-    monthSelect.value=currentMonth;
-    yearSelect.value=currentYear;
-  }
-  );
-
-  nextBtn.addEventListener("click",()=>{
-    currentMonth++;
-    if(currentMonth>11){
-      currentMonth=0;
-      currentYear++;
-    }
-    renderCalendar(currentMonth,currentYear);
-    monthSelect.value=currentMonth;
-    yearSelect.value=currentYear;
-  })
-  
-  //Jump to Specific Month & Year
-  jumpBtn.addEventListener("click",()=>{
-    currentMonth=monthSelect.value;
-    currentYear=yearSelect.value;
-    renderCalendar(currentMonth,currentYear);
-  })
 });
