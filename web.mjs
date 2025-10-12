@@ -123,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial render
   renderCalendar(currentMonth, currentYear);
+  renderEventsForMonth(currentMonth, currentYear);
 
   // Add click event listeners for "Previous" and "Next" buttons
   // to navigate the calendar month by month.
@@ -133,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentYear--;
     }
     renderCalendar(currentMonth,currentYear);
+    renderEventsForMonth(currentMonth, currentYear);
     monthSelect.value=currentMonth;
     yearSelect.value=currentYear;
   }
@@ -145,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentYear++;
     }
     renderCalendar(currentMonth,currentYear);
+    renderEventsForMonth(currentMonth, currentYear);
     monthSelect.value=currentMonth;
     yearSelect.value=currentYear;
   })
@@ -154,5 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     currentMonth=monthSelect.value;
     currentYear=yearSelect.value;
     renderCalendar(currentMonth,currentYear);
+    renderEventsForMonth(currentMonth, currentYear);
   })
 });
