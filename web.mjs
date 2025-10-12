@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     option.textContent = name;
     monthSelect.appendChild(option);
   });
+  monthSelect.value=currentMonth;
 
   // Populate year select
   for (let year = 1900; year <= 2050; year++) {
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     option.textContent = year;
     yearSelect.appendChild(option);
   }
+  yearSelect.value=currentYear;
 
   console.log("Month and year selects populated!");
 
