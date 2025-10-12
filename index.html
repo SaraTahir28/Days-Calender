@@ -1,9 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type="module" src="common.mjs"></script>
-        <script type="module" src="web.mjs"></script>
-    </head>
-    <body>
-    </body>
+<head><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Calender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header with previous/next buttons and month/year title -->
+  <header>
+    <button id="prev-month" aria-label="Previous month">Previous</button>
+    <span id="calendar-title" aria-live="polite"></span>
+    <button id="next-month" aria-label="Next month">Next</button>
+  </header>
+
+  <!-- Jump controls with labels -->
+  <div>
+    <label for="month-select">Month:</label>
+    <select id="month-select"></select>
+
+    <label for="year-select">Year:</label>
+    <select id="year-select"></select>
+
+    <button id="jump-button">Jump</button>
+  </div>
+
+  <!-- Calendar grid container -->
+  <div id="calendar-grid" role="table" aria-label="Monthly calendar"></div>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  <script type="module" src="web.mjs"></script>
+</body>
 </html>
