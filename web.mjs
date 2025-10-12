@@ -3,6 +3,7 @@ import { getEventDate, getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
 
+
 let currentMonth = dayjs().month(); // 0-11
 let currentYear = dayjs().year();
 

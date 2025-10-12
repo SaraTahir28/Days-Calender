@@ -22,17 +22,16 @@ export function getEventDate(event, year, month) {
 
   //compare all days of the month with event's dayname
   for (let d = 1; d <= daysInThisMonth; d++) {
-    const date = dayjs().year(year).month(month).day(d);
+    const date = dayjs().year(year).month(month).date(d);
     const dayName = date.format("dddd"); // like Monday,Tuesday,...
     if (targetDayName === dayName) {
       matchingDays.push(d);
     }
-
-    //if occurrence is last return last item of array
-    if (occurrenceIndex === -1) {
-      return matchingDays[matchingDays.length - 1];
-    }
-
-    return matchingDays[occurrenceIndex];
   }
+  //if occurrence is last return last item of array
+  if (occurrenceIndex === -1) {
+    return matchingDays[matchingDays.length - 1];
+  }
+
+  return matchingDays[occurrenceIndex];
 }
