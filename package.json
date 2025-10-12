@@ -1,0 +1,17 @@
+{
+  "name": "days-calendar",
+  "version": "1.0.0",
+  "description": "Calendar project showing commemorative days from JSON",
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "http-server ./",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "jest": "^29.7.0"
+  }
+}
