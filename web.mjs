@@ -97,4 +97,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial render
   renderCalendar(currentMonth, currentYear);
+  // Add click event listeners for "Previous" and "Next" buttons
+  // to navigate the calendar month by month.
+  prevBtn.addEventListener("click",()=>{
+    currentMonth--;
+    if (currentMonth<0){
+      currentMonth=11;
+      currentYear--;
+    }
+    renderCalendar(currentMonth,currentYear);
+    monthSelect.value=currentMonth;
+    yearSelect.value=currentYear;
+  }
+  );
+
+  nextBtn.addEventListener("click",()=>{
+    currentMonth++;
+    if(currentMonth>11){
+      currentMonth=0;
+      currentYear++;
+    }
+    renderCalendar(currentMonth,currentYear);
+    monthSelect.value=currentMonth;
+    yearSelect.value=currentYear;
+  })
 });
