@@ -1,0 +1,43 @@
+body {
+  font-family: sans-serif;
+  padding: 1rem;
+  max-width: 500px;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+#calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columns (Mon → Sun) */
+  gap: 4px;
+}
+
+#calendar-grid div[role="columnheader"] {
+  font-weight: bold;
+  text-align: center;
+  background: #eee;
+  padding: 6px 0;
+  border-radius: 4px;
+}
+
+#calendar-grid div[role="cell"] {
+  text-align: center;
+  padding: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-height: 40px;
+}
+
+#calendar-grid div[role="row"] {
+  display: contents; /* allows row children to align in grid */
+}
+
+select, button {
+  margin: 4px;
+}
