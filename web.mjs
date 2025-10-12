@@ -1,5 +1,5 @@
 
-import { getGreeting } from "./common.mjs";
+import { getEventDate, getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
 
@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
           cell.textContent = "";
         } else {
           cell.textContent = dayCounter;
+          cell.setAttribute('data-day', dayCounter);
           dayCounter++;
         }
 
@@ -93,6 +94,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     console.log(`Rendered ${monthNames[month]} ${year} (${daysInMonth} days, starts on ${firstDay.format("dddd")})`);
+  }
+
+  function renderEventsForMonth(month,year){
+     const currentMonthName=monthNames[month];
+    // Filter all events that occur in this month
+     const eventsThisMonth=daysData.filter(e=>e.monthName===currentMonthName);
+
+    // Loop through each event and render it in the calendar
+     eventsThisMonth.forEach(event => {
+    // Calculate the exact day number of the event in the current month/year
+     const eventDay=getEventDate(event,year,month);
+    // Only proceed if a valid day was returned
+     if(eventDay!=null){
+      // Find the corresponding cell in the calendar using the data-day attribute
+      const cell=calendarGrid.querySelector(`div[data-day="${eventDay}"]`);
+      // If the cell exists, create a new div to display the event
+      if(cell){
+        const eventEl=document.createElement("div");
+        eventEl.classList.add("special-day");// Add CSS class for styling
+        eventEl.textContent=event.name;
+        cell.appendChild(eventEl);// Append the event to the cell
+      }
+     }
+     });
+
   }
 
   // Initial render

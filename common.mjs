@@ -32,7 +32,7 @@ export function getEventDate(event, year, month) {
     if (occurrenceIndex === -1) {
       return matchingDays[matchingDays.length - 1];
     }
-    
+
     return matchingDays[occurrenceIndex];
   }
 }
