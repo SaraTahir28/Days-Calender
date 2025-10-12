@@ -6,6 +6,36 @@
 import { getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
-window.onload = function() {
-    document.querySelector("body").innerText = `${getGreeting()} - there are ${daysData.length} known days`;
-}
+
+let currentMonth = dayjs().month(); // 0-11
+let currentYear = dayjs().year();
+document.addEventListener("DOMContentLoaded", () => {
+const calendarTitle = document.getElementById("calendar-title");
+const calendarGrid = document.getElementById("calendar-grid");
+const prevBtn = document.getElementById("prev-month");
+const nextBtn = document.getElementById("next-month");
+const monthSelect = document.getElementById("month-select");
+const yearSelect = document.getElementById("year-select");
+const jumpBtn = document.getElementById("jump-button");
+
+const monthNames = [
+    "January","February","March","April","May","June",
+  "July","August","September","October","November","December"
+]
+//populating the select dropdown 
+monthNames.forEach((name, index) => {
+  const option = document.createElement("option");
+  option.value = index;     // 0 → January, 11 → December
+  option.textContent = name;
+  monthSelect.appendChild(option);
+})
+// Populate year select
+    for(let year=1900; year<=2050; year++){
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        yearSelect.appendChild(option);
+    }
+
+console.log("Month and year selects populated!");
+});
