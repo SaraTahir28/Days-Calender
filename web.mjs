@@ -84,6 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           cell.textContent = dayCounter;
           cell.setAttribute('data-day', dayCounter);
+          const today = dayjs();
+          if (year === today.year() && month === today.month() && dayCounter === today.date()) {
+             cell.classList.add('today');  }
           dayCounter++;
         }
 
