@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
           const today = dayjs();
           if (year === today.year() && month === today.month() && dayCounter === today.date()) {
              cell.classList.add('today');  }
-          dayCounter++;
           dayCounter++; //Increment dayCounter by one so the next cell gets the next day’s number.
         }
 
