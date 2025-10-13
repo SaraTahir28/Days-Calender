@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("Month and year selects populated!");
 
-  // ✅ Correct renderCalendar function
+  //  renderCalendar function
   function renderCalendar(month, year) {
     calendarGrid.innerHTML = ""; // Clear previous calendar
 
@@ -61,25 +61,30 @@ document.addEventListener("DOMContentLoaded", () => {
     calendarGrid.appendChild(headerRow);
 
     // First day & number of days in month
-    const firstDay = dayjs().year(year).month(month).date(1);
-    let weekday = firstDay.day(); // 0=Sun ... 6=Sat
+    const firstDay = dayjs().year(year).month(month).date(1); //First day gives you both the day and date of the week.
+
+    let weekday = firstDay.day(); // 0=Sun,6=Sat-day() tell you which day of the week to place your day on calender cell.
+
     let adjustedWeekday = (weekday === 0) ? 6 : weekday - 1; // 0=Mon ... 6=Sun
-    const daysInMonth = firstDay.daysInMonth();
+    const daysInMonth = firstDay.daysInMonth(); //how many days in this month -> firstday has given us.
+
 
     // Total cells before first day (padding)
-    let dayCounter = 1;
+    let dayCounter = 1;  //Tracks which day number we’re placing in the grid.
+
 
     // Build rows (weeks)
-    while (dayCounter <= daysInMonth) {
-      const weekRow = document.createElement("div");
+    while (dayCounter <= daysInMonth) {//The loop continues as long as we still have days left to place in the calendar
+
+      const weekRow = document.createElement("div"); //Each loop cycle creates a new “week” row.(Each week can hold up to 7 day cells (Mon → Sun).)
       weekRow.setAttribute("role", "row");
 
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 7; i++) { //The inner for loop makes 7 cells per row.
         const cell = document.createElement("div");
         cell.setAttribute("role", "cell");
 
         // Fill blanks before 1st day
-        if ((calendarGrid.children.length === 1 && i < adjustedWeekday) || dayCounter > daysInMonth) {
+        if ((calendarGrid.children.length === 1 && i < adjustedWeekday) || dayCounter > daysInMonth) { //calendarGrid.children.length===1 is first weekrow
           cell.textContent = "";
         } else {
           cell.textContent = dayCounter;
@@ -88,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (year === today.year() && month === today.month() && dayCounter === today.date()) {
              cell.classList.add('today');  }
           dayCounter++;
+          dayCounter++; //Increment dayCounter by one so the next cell gets the next day’s number.
         }
 
         weekRow.appendChild(cell);
@@ -139,8 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
   prevBtn.addEventListener("click",()=>{
     currentMonth--;
     if (currentMonth<0){
-      currentMonth=11;
-      currentYear--;
+      currentMonth=11; //wrap up to december of previous year
+      currentYear--; // subtract a year
     }
     renderCalendar(currentMonth,currentYear);
     renderEventsForMonth(currentMonth, currentYear);
@@ -151,9 +157,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nextBtn.addEventListener("click",()=>{
     currentMonth++;
-    if(currentMonth>11){
+    if(currentMonth>11){ //move to Jan of next year
       currentMonth=0;
-      currentYear++;
+      currentYear++;// increment by a year
     }
     renderCalendar(currentMonth,currentYear);
     renderEventsForMonth(currentMonth, currentYear);
