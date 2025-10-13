@@ -1,5 +1,14 @@
 
-import dayjs from "dayjs";
+let dayjs;
+if(typeof window === "undefined"){
+  // Running in Node.js (e.g. generate-ical.mjs)
+  const dayjsImport = await import("dayjs");
+  dayjs = dayjsImport.default;
+} else {
+  // Running in browser (e.g. web.mjs)
+  dayjs = window.dayjs;
+}
+
 export function getGreeting() {
     return "Hello";
 }

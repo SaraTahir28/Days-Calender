@@ -3,6 +3,7 @@ import { getEventDate, getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
 
+
 let currentMonth = dayjs().month(); // 0-11
 let currentYear = dayjs().year();
 
@@ -92,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
           const today = dayjs();
           if (year === today.year() && month === today.month() && dayCounter === today.date()) {
              cell.classList.add('today');  }
-          dayCounter++;
           dayCounter++; //Increment dayCounter by one so the next cell gets the next day’s number.
         }
 
