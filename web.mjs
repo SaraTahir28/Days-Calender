@@ -3,7 +3,6 @@ import { getEventDate, getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
 
-
 let currentMonth = dayjs().month(); // 0-11
 let currentYear = dayjs().year();
 
@@ -106,16 +105,19 @@ document.addEventListener("DOMContentLoaded", () => {
      eventsThisMonth.forEach(event => {
     // Calculate the exact day number of the event in the current month/year
      const eventDay=getEventDate(event,year,month);
+    
     // Only proceed if a valid day was returned
      if(eventDay!=null){
       // Find the corresponding cell in the calendar using the data-day attribute
-      const cell=calendarGrid.querySelector(`div[data-day="${eventDay}"]`);
+      const cell=calendarGrid.querySelector(`div[role="cell"][data-day="${eventDay}"]`);
       // If the cell exists, create a new div to display the event
       if(cell){
         const eventEl=document.createElement("div");
         eventEl.classList.add("special-day");// Add CSS class for styling
         eventEl.textContent=event.name;
-        cell.appendChild(eventEl);// Append the event to the cell
+       cell.appendChild(eventEl);// Append the event to the cell
+      }else{
+        console.warn(`Cell for day ${eventDay} not found!`);
       }
      }
      });

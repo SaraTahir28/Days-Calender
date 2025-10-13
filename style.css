@@ -31,7 +31,8 @@ header {
   padding: 8px 0;
   border: 1px solid #ddd;
   border-radius: 4px;
-  min-height: 40px;
+  min-height: 60px;
+  position: relative;
 }
 
 #calendar-grid div[role="row"] {
@@ -42,3 +43,12 @@ select, button {
   margin: 4px;
 }
 
+.special-day {
+  background-color: #ffeb3b; 
+  color: #000;
+  font-weight: bold;
+  margin-top: 2px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.8em;
+}

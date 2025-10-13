@@ -12,7 +12,7 @@ export function getEventDate(event, year, month) {
     second: 1,
     third: 2,
     fourth: 3,
-    last: -1,
+    last: -1
   };
   const targetDayName = event.dayName;
   const occurrenceIndex = occurrenceMap[event.occurrence];
@@ -33,5 +33,5 @@ export function getEventDate(event, year, month) {
     return matchingDays[matchingDays.length - 1];
   }
 
-  return matchingDays[occurrenceIndex];
+  return matchingDays[occurrenceIndex] ;
 }
