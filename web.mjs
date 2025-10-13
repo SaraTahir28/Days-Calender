@@ -1,5 +1,5 @@
 
-import { getGreeting } from "./common.mjs";
+import { getEventDate, getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 
 
@@ -88,6 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
           cell.textContent = "";
         } else {
           cell.textContent = dayCounter;
+          cell.setAttribute('data-day', dayCounter); //setting attribute for better styling later
+          const today = dayjs();
+          if (year === today.year() && month === today.month() && dayCounter === today.date()) {
+             cell.classList.add('today');  }
+          dayCounter++;
           dayCounter++; //Increment dayCounter by one so the next cell gets the next day’s number.
         }
 
@@ -100,8 +105,40 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(`Rendered ${monthNames[month]} ${year} (${daysInMonth} days, starts on ${firstDay.format("dddd")})`);
   }
 
+  function renderEventsForMonth(month,year){
+     const currentMonthName = monthNames[month]; //month is the index which gets converted to a month name
+
+    // Filter all events that occur in this month
+     const eventsThisMonth = daysData.filter(e => e.monthName===currentMonthName); //gives us an array of events in the month
+
+    // Loop through each event and render it in the calendar
+     eventsThisMonth.forEach(event => {
+    // Calculate the exact day number of the event in the current month/year
+     const eventDay = getEventDate(event,year,month); //returns a number for the day.(date for e.g second tuesday)
+    
+    // Only proceed if a valid day was returned
+     if(eventDay!=null){
+      // Find the corresponding cell in the calendar using the data-day attribute
+      
+      const cell=calendarGrid.querySelector(`div[role="cell"][data-day="${eventDay}"]`);
+      // If the cell exists, create a new div to display the event
+
+      if(cell){
+        const eventEl=document.createElement("div");
+        eventEl.classList.add("special-day");// Add CSS class for styling
+        eventEl.textContent=event.name;
+       cell.appendChild(eventEl);// Append the event to the cell
+      }else{
+        console.warn(`Cell for day ${eventDay} not found!`);
+      }
+     }
+     });
+
+  }
+
   // Initial render
   renderCalendar(currentMonth, currentYear);
+  renderEventsForMonth(currentMonth, currentYear);
 
   // Add click event listeners for "Previous" and "Next" buttons
   // to navigate the calendar month by month.
@@ -112,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentYear--; // subtract a year
     }
     renderCalendar(currentMonth,currentYear);
+    renderEventsForMonth(currentMonth, currentYear);
     monthSelect.value=currentMonth;
     yearSelect.value=currentYear;
   }
@@ -124,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentYear++;// increment by a year
     }
     renderCalendar(currentMonth,currentYear);
+    renderEventsForMonth(currentMonth, currentYear);
     monthSelect.value=currentMonth;
     yearSelect.value=currentYear;
   })
@@ -133,5 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
     currentMonth=monthSelect.value;
     currentYear=yearSelect.value;
     renderCalendar(currentMonth,currentYear);
+    renderEventsForMonth(currentMonth, currentYear);
   })
 });
