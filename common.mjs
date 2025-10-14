@@ -1,4 +1,19 @@
-// This is a placeholder file which shows how you can define functions which can be used from both a browser script and a node script. You can delete the contents of the file once you have understood how it works.
+
+
+
+//This code sets up the dayjs variable to work in both environments: 
+// it dynamically imports dayjs in Node.js and uses window.dayjs in the browser. 
+// This lets your shared functions run seamlessly in both Node and web without changing imports.
+
+
+let dayjs;
+if(typeof window === "undefined"){ //node.js has no window object so undefined means running in node.
+  const dayjsImport = await import("dayjs"); //loads the dayjs library from your Node modules at runtime
+  dayjs = dayjsImport.default;
+} else {
+  // Running in browser (e.g. web.mjs)
+  dayjs = window.dayjs;
+}
 
 export function getGreeting() {
     return "Hello";
