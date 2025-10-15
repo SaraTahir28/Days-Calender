@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Weekday headers (Mon → Sun)
     const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     const headerRow = document.createElement("div");
-    headerRow.setAttribute("role", "row");
+    headerRow.setAttribute("role", "row"); //set ARIA label- tells screen reader that this element acts like a row.
 
     weekdays.forEach(day => {
       const cell = document.createElement("div");
@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
     calendarGrid.appendChild(headerRow);
 
     // First day & number of days in month
-    const firstDay = dayjs().year(year).month(month).date(1); //First day gives you both the day and date of the week.
+    const firstDay = dayjs().year(year).month(month).date(1); //creates a dayjs object for the first day of the month.
 
-    let weekday = firstDay.day(); // 0=Sun,6=Sat-day() tell you which day of the week to place your day on calender cell.
+    let weekday = firstDay.day(); // 0=Sun,6=Sat-day() => tells you which day of the week to place your day on calender cell.
 
     let adjustedWeekday = (weekday === 0) ? 6 : weekday - 1; // 0=Mon ... 6=Sun
     const daysInMonth = firstDay.daysInMonth(); //how many days in this month -> firstday has given us.
@@ -80,16 +80,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const weekRow = document.createElement("div"); //Each loop cycle creates a new “week” row.(Each week can hold up to 7 day cells (Mon → Sun).)
       weekRow.setAttribute("role", "row");
 
-      for (let i = 0; i < 7; i++) { //The inner for loop makes 7 cells per row.
+      for (let i = 0; i < 7; i++) { //The inner for loop makes 7 cells per row, i being the cell index.
         const cell = document.createElement("div");
         cell.setAttribute("role", "cell");
 
-        // Fill blanks before 1st day
-        if ((calendarGrid.children.length === 1 && i < adjustedWeekday) || dayCounter > daysInMonth) { //calendarGrid.children.length===1 is first weekrow
+        // Fill blanks before 1st day in weekrow1
+        if ((calendarGrid.children.length === 1 && i < adjustedWeekday) || dayCounter > daysInMonth) { // first weekrow
           cell.textContent = "";
         } else {
           cell.textContent = dayCounter;
-          cell.setAttribute('data-day', dayCounter); //setting attribute for better styling later
+          cell.setAttribute('data-day', dayCounter); //setting attribute for assigning events easily.
           const today = dayjs();
           if (year === today.year() && month === today.month() && dayCounter === today.date()) {
              cell.classList.add('today');  }
@@ -117,10 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
      const eventDay = getEventDate(event,year,month); //returns a number for the day.(date for e.g second tuesday)
     
     // Only proceed if a valid day was returned
-     if(eventDay!=null){
+     if(eventDay != null){
       // Find the corresponding cell in the calendar using the data-day attribute
       
-      const cell=calendarGrid.querySelector(`div[role="cell"][data-day="${eventDay}"]`);
+      const cell = calendarGrid.querySelector(`div[role="cell"][data-day="${eventDay}"]`);
       // If the cell exists, create a new div to display the event
 
       if(cell){
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         eventEl.textContent=event.name;
        cell.appendChild(eventEl);// Append the event to the cell
       }else{
-        console.warn(`Cell for day ${eventDay} not found!`);
+        console.warn(`Cell for day ${eventDay} not found!`); //alias for error
       }
      }
      });
