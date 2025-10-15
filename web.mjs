@@ -169,8 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
   //Jump to Specific Month & Year
   jumpBtn.addEventListener("click",()=>{
-    currentMonth=monthSelect.value;
-    currentYear=yearSelect.value;
+    currentMonth=parseInt(monthSelect.value); //Make sure the month is a number, select value is a string
+    currentYear=parseInt(yearSelect.value); //Make sure the month is a number, select value is a string
     renderCalendar(currentMonth,currentYear);
     renderEventsForMonth(currentMonth, currentYear);
   })
